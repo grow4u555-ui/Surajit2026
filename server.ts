@@ -208,7 +208,7 @@ export class ErrorOverlay extends HTMLElement {}
   }
 
   httpServer.listen(PORT, '0.0.0.0', () => {
-    console.log(`Kora & Loom server running on http://0.0.0.0:${PORT}`);
+    console.log(`AmarBazar server running on http://0.0.0.0:${PORT}`);
   });
 }
 

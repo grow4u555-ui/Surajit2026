@@ -220,11 +220,11 @@ export const STARTER_PRODUCTS: Omit<Product, 'createdAt' | 'updatedAt'>[] = [
 
 export const DEFAULT_STORE_SETTINGS: Omit<StoreSettings, 'updatedAt'> = {
   id: 'main',
-  storeName: 'Kora & Loom',
+  storeName: 'AmarBazar',
   tagline: 'Quiet objects shaped by hand, earth, and fire.',
-  contactEmail: 'atelier@koraandloom.in',
-  contactPhone: '+91 98204 11842',
-  studioAddress: '14 Kala Ghoda Courtyard, Fort, Mumbai 400001, India',
+  contactEmail: 'grow4u555@gmail.com',
+  contactPhone: '+917029678382',
+  studioAddress: 'Kolkata 700001, India',
   shippingFee: 250,
   freeShippingThreshold: 8000,
   currencySymbol: '₹',

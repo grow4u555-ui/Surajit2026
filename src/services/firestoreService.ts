@@ -63,7 +63,15 @@ export function subscribeStoreSettings(onData: (settings: StoreSettings) => void
     refDoc,
     (snap) => {
       if (snap.exists()) {
-        onData({ ...snap.data(), id: snap.id } as StoreSettings);
+        const data = { ...snap.data(), id: snap.id } as StoreSettings;
+        if (
+          data.storeName === 'Kora & Loom' &&
+          data.contactEmail === 'atelier@koraandloom.in'
+        ) {
+          onData({ ...DEFAULT_STORE_SETTINGS });
+        } else {
+          onData(data);
+        }
       } else {
         onData({ ...DEFAULT_STORE_SETTINGS });
       }

@@ -268,7 +268,7 @@ export function HomePage() {
               Slow Making in an Age of Instant Objects
             </h2>
             <p className="text-base text-[#B8AFA2] leading-relaxed">
-              Founded in Mumbai, Kora &amp; Loom partners directly with family-run pottery kilns in Pondicherry, pit-loom weavers in Kutch, and brass casters in Moradabad. Every vessel and textile carries subtle variations of the hand that shaped it.
+              Founded in Kolkata, AmarBazar partners directly with family-run pottery kilns in Pondicherry, pit-loom weavers in Kutch, and brass casters in Moradabad. Every vessel and textile carries subtle variations of the hand that shaped it.
             </p>
             <p className="text-base text-[#B8AFA2] leading-relaxed">
               We produce strictly in numbered small batches—never mass warehousing—so raw materials remain honest, kiln firing stays local, and artisans earn fair studio commissions.
