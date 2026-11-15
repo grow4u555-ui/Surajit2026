@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { CartDrawer } from './components/CartDrawer';
 import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
@@ -22,11 +22,14 @@ function ScrollToTop() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
     if (hash) {
-      const target = document.getElementById(hash.slice(1));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
+      const id = hash.slice(1);
+      window.setTimeout(() => {
+        const target = document.getElementById(id);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 60);
+      return;
     }
     window.scrollTo(0, 0);
   }, [pathname, hash]);
@@ -73,7 +76,7 @@ class AppErrorBoundary extends React.Component<
 export default function App() {
   return (
     <AppErrorBoundary>
-      <BrowserRouter>
+      <HashRouter>
         <StoreProvider>
           <ScrollToTop />
           <div className="min-h-screen flex flex-col bg-[#12100E] text-[#F4EFE6]">
@@ -95,7 +98,7 @@ export default function App() {
             <ToastContainer />
           </div>
         </StoreProvider>
-      </BrowserRouter>
+      </HashRouter>
     </AppErrorBoundary>
   );
 }

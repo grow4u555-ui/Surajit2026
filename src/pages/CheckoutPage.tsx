@@ -103,7 +103,10 @@ export function CheckoutPage() {
 
   useEffect(() => {
     fetch('/api/payments/razorpay/status')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('API unavailable');
+        return r.json();
+      })
       .then((data: RazorpayStatus) => setRazorpayStatus(data))
       .catch(() => {
         setRazorpayStatus({ configured: false, keyId: null, mode: 'unconfigured' });
