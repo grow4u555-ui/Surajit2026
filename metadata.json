@@ -1,0 +1,6 @@
+{
+  "name": "Kora & Loom",
+  "description": "Artisanal handmade home decor, sculptural ceramics, brass lighting, and hand-loomed textiles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

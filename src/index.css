@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, Cambria, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-obsidian: #12100E;
+  --color-espresso: #1A1714;
+  --color-umbra: #231F1B;
+  --color-cream: #F4EFE6;
+  --color-sand: #B8AFA2;
+  --color-taupe: #857B6E;
+  --color-gold: #C8A96A;
+  --color-gold-hover: #D9BE84;
+  --color-earth: #8B735B;
+}
+
+@layer base {
+  html {
+    background-color: #12100E;
+    color: #F4EFE6;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #12100E;
+    color: #F4EFE6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+
+  button, a, input, select, textarea {
+    outline-color: #C8A96A;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #12100E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2E2822;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #857B6E;
+}

@@ -1,0 +1,210 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Handcrafted home decor product with color variations and variation-specific imagery.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "description": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "category": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "price": { "type": "number" },
+        "discountPrice": { "type": "number" },
+        "images": { "type": "array", "description": "Default product image URLs (max 12)." },
+        "colorVariations": { "type": "array", "description": "Color variation objects with name, hex, images, and stock (max 10)." },
+        "stockQuantity": { "type": "integer" },
+        "sku": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "featured": { "type": "boolean" },
+        "bestSeller": { "type": "boolean" },
+        "newArrival": { "type": "boolean" },
+        "materials": { "type": "string", "maxLength": 300 },
+        "dimensions": { "type": "string", "maxLength": 200 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "name",
+        "slug",
+        "description",
+        "category",
+        "price",
+        "images",
+        "colorVariations",
+        "stockQuantity",
+        "sku",
+        "featured",
+        "bestSeller",
+        "newArrival",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category for storefront navigation and filtering.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "slug": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "imageUrl": { "type": "string", "maxLength": 1000 },
+        "displayOrder": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "slug", "displayOrder", "createdAt", "updatedAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order record with itemized products, selected variations, shipping address, and payment status.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "orderNumber": { "type": "string", "minLength": 3, "maxLength": 40 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "customerName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "customerEmail": { "type": "string", "minLength": 3, "maxLength": 180 },
+        "customerPhone": { "type": "string", "minLength": 6, "maxLength": 24 },
+        "shippingAddress": { "type": "object" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "shippingCost": { "type": "number" },
+        "discountTotal": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["COD", "RAZORPAY"] },
+        "paymentStatus": { "type": "string", "enum": ["Pending", "Paid", "Failed", "Refunded"] },
+        "razorpayOrderId": { "type": "string", "maxLength": 120 },
+        "razorpayPaymentId": { "type": "string", "maxLength": 120 },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "orderNumber",
+        "userId",
+        "customerName",
+        "customerEmail",
+        "customerPhone",
+        "shippingAddress",
+        "items",
+        "subtotal",
+        "shippingCost",
+        "discountTotal",
+        "totalAmount",
+        "paymentMethod",
+        "paymentStatus",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user profile with isolated PII and non-privileged role field.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "email": { "type": "string", "minLength": 3, "maxLength": 180 },
+        "phone": { "type": "string", "maxLength": 24 },
+        "address": { "type": "object" },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "email", "role", "createdAt", "updatedAt"]
+    },
+    "CartItem": {
+      "title": "CartItem",
+      "description": "Persistent shopping cart item scoped to a specific user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "productId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "selectedColor": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "quantity": { "type": "integer" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "productId", "selectedColor", "quantity", "updatedAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Authoritative admin membership document.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "minLength": 3, "maxLength": 180 },
+        "grantedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "grantedAt"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Global store configuration, shipping rates, and brand information.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeName": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 240 },
+        "contactEmail": { "type": "string", "maxLength": 180 },
+        "contactPhone": { "type": "string", "maxLength": 32 },
+        "studioAddress": { "type": "string", "maxLength": 300 },
+        "shippingFee": { "type": "number" },
+        "freeShippingThreshold": { "type": "number" },
+        "currencySymbol": { "type": "string", "maxLength": 8 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "storeName", "contactEmail", "shippingFee", "freeShippingThreshold", "currencySymbol", "updatedAt"]
+    },
+    "NewsletterSubscriber": {
+      "title": "NewsletterSubscriber",
+      "description": "Newsletter subscription record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "minLength": 3, "maxLength": 180 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Publicly readable catalog of handmade home decor products; writable by admins (and atomic stock decrement)."
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Publicly readable product categories managed by admins."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer orders; readable and writable by order owner (create/cancel pending) or admins."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private user profiles containing PII; strictly restricted to the owning user or admins."
+    },
+    "/users/{userId}/cart/{itemId}": {
+      "schema": { "$ref": "#/entities/CartItem" },
+      "description": "Persistent shopping cart items scoped strictly to the owning user."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Authoritative admin allowlist documents."
+    },
+    "/storeSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/StoreSettings" },
+      "description": "Publicly readable store metadata and shipping configuration; writable only by admins."
+    },
+    "/newsletterSubscribers/{subscriberId}": {
+      "schema": { "$ref": "#/entities/NewsletterSubscriber" },
+      "description": "Newsletter signups; create-only for visitors, readable/deletable by admins."
+    }
+  }
+}
